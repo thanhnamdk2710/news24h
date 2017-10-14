@@ -6,40 +6,37 @@
     <div id="page-wrapper">
         <div class="container-fluid">
             <div class="row">
+                @if(session('thongbao'))
+                    <div class="alert alert-success">
+                        {{ session('thongbao') }}
+                    </div>
+                @endif
                 <div class="col-lg-12">
-                    <h1 class="page-header">Category
-                        <small>List</small>
+                    <h1 class="page-header">Thể Loại
+                        <small>Danh sách</small>
                     </h1>
                 </div>
                 <!-- /.col-lg-12 -->
                 <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                     <thead>
-                    <tr align="center">
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Category Parent</th>
-                        <th>Status</th>
-                        <th>Delete</th>
-                        <th>Edit</th>
-                    </tr>
+                        <tr align="center">
+                            <th>ID</th>
+                            <th>Tên</th>
+                            <th>Tên không dấu</th>
+                            <th>Xóa</th>
+                            <th>Sửa</th>
+                        </tr>
                     </thead>
                     <tbody>
-                    <tr class="odd gradeX" align="center">
-                        <td>1</td>
-                        <td>Tin Tức</td>
-                        <td>None</td>
-                        <td>Hiện</td>
-                        <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="#"> Delete</a></td>
-                        <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="#">Edit</a></td>
-                    </tr>
-                    <tr class="even gradeC" align="center">
-                        <td>2</td>
-                        <td>Bóng Đá</td>
-                        <td>Thể Thao</td>
-                        <td>Ẩn</td>
-                        <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="#"> Delete</a></td>
-                        <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="#">Edit</a></td>
-                    </tr>
+                        @foreach($theloai as $tl)
+                            <tr class="even gradeC" align="center">
+                                <td>{{ $tl->id }}</td>
+                                <td>{{ $tl->Ten }}</td>
+                                <td>{{ $tl->TenKhongDau }}</td>
+                                <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="admin/theloai/delete/{{ $tl->id }}"> Xóa</a></td>
+                                <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="admin/theloai/edit/{{ $tl->id }}"> Sửa</a></td>
+                            </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>

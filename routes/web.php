@@ -23,8 +23,12 @@ Route::group(['prefix'=>'admin'], function (){
         Route::get('list', 'TheLoaiController@getList');
 
         Route::get('add', 'TheLoaiController@getAdd');
+        Route::post('add', 'TheLoaiController@postAdd');
 
-        Route::get('edit', 'TheLoaiController@getEdit');
+        Route::get('edit/{id}', 'TheLoaiController@getEdit');
+        Route::post('edit/{id}', 'TheLoaiController@postEdit');
+
+        Route::get('delete/{id}', 'TheLoaiController@getDelete');
     });
 
     // Loaitin
@@ -32,9 +36,13 @@ Route::group(['prefix'=>'admin'], function (){
         // admin/loaitin/add
         Route::get('list', 'LoaiTinController@getList');
 
-        Route::get('add', 'LoaiTinController@getAdd');
+         Route::get('add', 'LoaiTinController@getAdd');
+         Route::post('add', 'LoaiTinController@postAdd');
 
-        Route::get('edit', 'LoaiTinController@getEdit');
+         Route::get('edit/{id}', 'LoaiTinController@getEdit');
+         Route::post('edit/{id}', 'LoaiTinController@postEdit');
+
+         Route::get('delete/{id}', 'LoaiTinController@getDelete');
     });
 
      // Tintuc
