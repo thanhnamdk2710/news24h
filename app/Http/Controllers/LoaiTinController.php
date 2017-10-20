@@ -70,6 +70,7 @@ class LoaiTinController extends Controller
 
     public function getDelete($id){
         $loaitin = LoaiTin::find($id);
+        $loaitin->tintuc()->delete();
         $loaitin->delete();
 
         return redirect('admin/loaitin/list')->with('thongbao', 'Xóa thành công.');

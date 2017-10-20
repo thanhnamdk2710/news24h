@@ -51,19 +51,35 @@ Route::group(['prefix'=>'admin'], function (){
         Route::get('list', 'TinTucController@getList');
 
         Route::get('add', 'TinTucController@getAdd');
+        Route::post('add', 'TinTucController@postAdd');
 
-        Route::get('edit', 'TinTucController@getEdit');
+        Route::get('edit/{id}', 'TinTucController@getEdit');
+        Route::post('edit/{id}', 'TinTucController@postEdit');
+
+         Route::get('delete/{id}', 'TinTucController@getDelete');
+    });
+
+    // BinhLuan
+    Route::group(['prefix'=>'comment'], function (){
+        Route::get('delete/{id}/{idTinTuc}', 'CommentController@getDelete');
+    });
+
+    // Slide
+    Route::group(['prefix'=>'slide'], function (){
+        // admin/tintuc/add
+        Route::get('list', 'SlideController@getList');
+
+        Route::get('add', 'SlideController@getAdd');
+        Route::post('add', 'SlideController@postAdd');
+
+        Route::get('edit/{id}', 'SlideController@getEdit');
+        Route::post('edit/{id}', 'SlideController@postEdit');
+
+        Route::get('delete/{id}', 'SlideController@getDelete');
     });
 
     // User
-     Route::group(['prefix'=>'user'], function (){
-        // admin/user/add
-        Route::get('list', 'UserController@getList');
-
-        Route::get('add', 'UserController@getAdd');
-
-        Route::get('edit', 'UserController@getEdit');
-    });
+     Route::resource('user', 'UserController');
 
     // Slide
      Route::group(['prefix'=>'slide'], function (){
@@ -74,5 +90,9 @@ Route::group(['prefix'=>'admin'], function (){
 
         Route::get('edit', 'SlideController@getEdit');
     });
+
+     Route::group(['prefix'=>'ajax'], function (){
+        Route::get('loaitin/{idTheLoai}', 'AjaxController@getLoaiTin');
+     });
 
 });

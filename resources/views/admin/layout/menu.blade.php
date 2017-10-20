@@ -67,10 +67,10 @@
                 <a href="admin/user/list"><i class="fa fa-users fa-fw"></i> USer<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                     <li>
-                        <a href="admin/user/list">Danh sách</a>
+                        <a href="admin/user">Danh sách</a>
                     </li>
                     <li>
-                        <a href="admin/user/add">Thêm mới</a>
+                        <a href="admin/user/create">Thêm mới</a>
                     </li>
                 </ul>
                 <!-- /.nav-second-level -->

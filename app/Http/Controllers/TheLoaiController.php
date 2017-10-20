@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Comment;
+use App\LoaiTin;
+use App\TinTuc;
 use Illuminate\Http\Request;
 use App\TheLoai;
 
@@ -64,6 +67,8 @@ class TheLoaiController extends Controller
 
     public function getDelete($id){
         $theloai = TheLoai::find($id);
+        $theloai->tintuc()->delete();
+        $theloai->loaitin()->delete();
         $theloai->delete();
 
         return redirect('admin/theloai/list')->with('thongbao','Xóa thành công.');

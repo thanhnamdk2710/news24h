@@ -5,10 +5,15 @@
     <!-- Page Content -->
     <div id="page-wrapper">
         <div class="container-fluid">
+            @if(session('thongbao'))
+                <div class="alert alert-success">
+                    {{ session('thongbao') }}
+                </div>
+            @endif
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Category
-                        <small>List</small>
+                    <h1 class="page-header">User
+                        <small>Danh sách</small>
                     </h1>
                 </div>
                 <!-- /.col-lg-12 -->
@@ -16,30 +21,38 @@
                     <thead>
                     <tr align="center">
                         <th>ID</th>
-                        <th>Name</th>
-                        <th>Category Parent</th>
-                        <th>Status</th>
-                        <th>Delete</th>
-                        <th>Edit</th>
+                        <th>Tên</th>
+                        <th>Email</th>
+                        <th>Quyền</th>
+                        <th>Xóa</th>
+                        <th>Sửa</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr class="odd gradeX" align="center">
-                        <td>1</td>
-                        <td>Tin Tức</td>
-                        <td>None</td>
-                        <td>Hiện</td>
-                        <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="#"> Delete</a></td>
-                        <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="#">Edit</a></td>
-                    </tr>
-                    <tr class="even gradeC" align="center">
-                        <td>2</td>
-                        <td>Bóng Đá</td>
-                        <td>Thể Thao</td>
-                        <td>Ẩn</td>
-                        <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="#"> Delete</a></td>
-                        <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="#">Edit</a></td>
-                    </tr>
+                        @foreach($users as $user)
+                        <tr class="odd gradeX" align="center">
+                            <td>{{ $user->id }}</td>
+                            <td>{{ $user->name }}</td>
+                            <td>{{ $user->email }}</td>
+                            <td>
+                                @if($user->quyen == 1)
+                                    {{ 'Admin' }}
+                                @elseif($user->quyen == 0)
+                                    {{ 'Tác giả' }}
+                                @endif
+                            </td>
+                            <td class="center">
+                                <form action="{{ url('admin/user', $user->id) }}" method="POST">
+                                    {{ method_field('DELETE') }}
+                                    {{ csrf_field() }}
+                                    <button type="submit" class="btn btn-default"><i class="fa fa-trash-o  fa-fw"></i> Xóa</button>
+                                </form>
+                            </td>
+                            <td class="center">
+                                <a href="admin/user/{{ $user->id }}/edit" class="btn btn-default"> <i class="fa fa-pencil fa-fw"></i> Sửa</a>
+                            </td>
+                        </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>

@@ -6,47 +6,65 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Category
-                        <small>Edit</small>
+                    <h1 class="page-header">Tài khoản
+                        <small>{{ $user->name }}</small>
                     </h1>
                 </div>
                 <!-- /.col-lg-12 -->
                 <div class="col-lg-7" style="padding-bottom:120px">
-                    <form action="" method="POST">
+                    @if(count($errors) > 0)
+                        <div class="alert alert-danger">
+                            @foreach($errors->all() as $err)
+                                {{ $err }} <br>
+                            @endforeach
+                        </div>
+                    @endif
+
+                    @if(session('thongbao'))
+                        <div class="alert alert-success">
+                            {{ session('thongbao') }}
+                        </div>
+                    @endif
+                    <form action="admin/user/{{ $user->id }}" method="POST" enctype="multipart/form-data">
+                        {{ method_field('PUT') }}
+                        {{ csrf_field() }}
                         <div class="form-group">
-                            <label>Category Parent</label>
-                            <select class="form-control">
-                                <option value="0">Please Choose Category</option>
-                                <option value="">Tin Tức</option>
-                            </select>
+                            <label>Tài khoản</label>
+                            <input class="form-control" name="name" placeholder="Nhập tài khoản" value="{{ $user->name }}"/>
                         </div>
                         <div class="form-group">
-                            <label>Category Name</label>
-                            <input class="form-control" name="txtCateName" placeholder="Please Enter Category Name" />
+                            <label>Email</label>
+                            <input readonly type="text" name="email" class="form-control" placeholder="Nhập địa chỉ email" value="{{ $user->email }}">
                         </div>
                         <div class="form-group">
-                            <label>Category Order</label>
-                            <input class="form-control" name="txtOrder" placeholder="Please Enter Category Order" />
+                            <label>Mật khẩu</label>
+                            <input type="password" name="password" class="form-control" placeholder="Nhập mật khẩu">
                         </div>
                         <div class="form-group">
-                            <label>Category Keywords</label>
-                            <input class="form-control" name="txtOrder" placeholder="Please Enter Category Keywords" />
+                            <label>Nhập lại mật khẩu</label>
+                            <input type="password" name="re_password" class="form-control" placeholder="Nhập lại mật khẩu">
                         </div>
                         <div class="form-group">
-                            <label>Category Description</label>
-                            <textarea class="form-control" rows="3"></textarea>
+                            <label>Quyền tài khoản</label>
+                            <p>
+                                <label class="radio-inline">
+                                    <input
+                                        @if($user->quyen == 0)
+                                            {{ 'checked' }}
+                                        @endif
+                                        name="quyen" value="0"type="radio">Tác giả
+                                </label>
+                                <label class="radio-inline">
+                                    <input
+                                        @if($user->quyen == 1)
+                                        {{ 'checked' }}
+                                        @endif
+                                        name="quyen" value="1" type="radio">Admin
+                                </label>
+                            </p>
                         </div>
-                        <div class="form-group">
-                            <label>Category Status</label>
-                            <label class="radio-inline">
-                                <input name="rdoStatus" value="1" checked="" type="radio">Visible
-                            </label>
-                            <label class="radio-inline">
-                                <input name="rdoStatus" value="2" type="radio">Invisible
-                            </label>
-                        </div>
-                        <button type="submit" class="btn btn-default">Category Edit</button>
-                        <button type="reset" class="btn btn-default">Reset</button>
+                        <button type="submit" class="btn btn-primary">Thêm mới</button>
+                        <button type="reset" class="btn btn-default">Làm mới</button>
                         <form>
                 </div>
             </div>
