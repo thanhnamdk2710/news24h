@@ -63,7 +63,7 @@
                                 </label>
                             </p>
                         </div>
-                        <button type="submit" class="btn btn-primary">Thêm mới</button>
+                        <button type="submit" class="btn btn-primary">Chỉnh sửa</button>
                         <button type="reset" class="btn btn-default">Làm mới</button>
                         <form>
                 </div>

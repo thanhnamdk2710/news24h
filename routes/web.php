@@ -12,11 +12,14 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('pages.trangchu');
 });
 
+Route::get('admin/login', 'UserController@getLoginAdmin');
+Route::post('admin/login', 'UserController@postLoginAdmin');
+Route::get('admin/logout', 'UserController@getLogoutAdmin');
 
-Route::group(['prefix'=>'admin'], function (){
+Route::group(['prefix'=>'admin', 'middleware'=>'adminLogin'], function (){
     // Theloai
     Route::group(['prefix'=>'theloai'], function (){
         // admin/theloai/add
@@ -96,3 +99,4 @@ Route::group(['prefix'=>'admin'], function (){
      });
 
 });
+
