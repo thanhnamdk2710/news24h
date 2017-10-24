@@ -84,7 +84,9 @@ class SlideController extends Controller
                 $Hinh = str_random(4)."_". $name;
             }
             $file->move('upload/slide/', $Hinh);
-            unlink("upload/slide/".$slide->Hinh);
+            if (file_exists('upload/slide/'.$slide->Hinh)){
+                unlink("upload/slide/".$slide->Hinh);
+            }
             $slide->Hinh = $Hinh;
         }
 
@@ -94,7 +96,9 @@ class SlideController extends Controller
 
     public function getDelete($id){
         $slide = Slide::find($id);
-        unlink("upload/slide/".$slide->Hinh);
+        if (file_exists('upload/slide/'.$slide->Hinh)){
+            unlink("upload/slide/".$slide->Hinh);
+        }
         $slide->delete();
         return redirect('admin/slide/list')->with('thongbao', 'Xóa thành công.');
     }

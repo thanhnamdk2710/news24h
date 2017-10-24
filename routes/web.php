@@ -11,9 +11,25 @@
 |
 */
 
-Route::get('/', function () {
-    return view('pages.trangchu');
-});
+Route::get('/', 'PageController@trangchu');
+Route::get('lienhe', 'PageController@lienhe');
+Route::get('loaitin/{id}/{TenKhongDau}.html', 'PageController@loaitin');
+Route::get('tintuc/{id}/{TenKhongDau}.html', 'PageController@tintuc');
+
+Route::get('login', 'PageController@getLogin');
+Route::post('login', 'PageController@postLogin');
+
+Route::get('logout', 'PageController@getLogout');
+
+Route::get('signin', 'PageController@getSignin');
+Route::post('signin', 'PageController@postSignin');
+
+Route::get('user', 'PageController@getUser');
+Route::post('user/{id}', 'PageController@postUser');
+
+Route::post('comment/{id}', 'CommentController@postComment');
+Route::post('search', 'PageController@search');
+
 
 Route::get('admin/login', 'UserController@getLoginAdmin');
 Route::post('admin/login', 'UserController@postLoginAdmin');
